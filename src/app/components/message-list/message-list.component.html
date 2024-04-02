@@ -1,0 +1,30 @@
+<p>message-list works!</p>
+
+<h3>Messages List</h3>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Mobile</th>
+      <th scope="col">Message</th>
+      <th scope="col">Actions</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let obj of messageArray">
+    <tr>
+      <td>{{ obj._id }}</td>
+      <td>{{ obj.name }}</td>
+      <td>{{ obj.email }}</td>
+      <td>{{ obj.mobile }}</td>
+      <td>{{ obj.message }}</td>
+      <td><button type="button" class="btn btn-info btn-sm">Edit</button></td>
+      <td>
+        <button type="button" class="btn btn-danger btn-sm">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
