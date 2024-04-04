@@ -2,13 +2,65 @@
 
 <h3>Messages List</h3>
 
+@if(showAlert){
+<div
+  style="
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    justify-content: center;
+  "
+>
+  <div class="alert alert-danger">
+    <p>Are you sure to delete this message?</p>
+    <button class="btn btn-danger" (click)="confirmDelete()">Yes</button>
+    <button class="btn btn-primary" (click)="cancelDelete()">No</button>
+  </div>
+</div>
+}
+<div>
+  @if(showSuccessModal){
+  <div class="alert alert-success" role="alert">Contact Deleted</div>
+  }
+</div>
+
+<div>
+  @if(showFailureModal){
+  <div class="alert alert-failure" role="alert">
+    Error while deleting Contact
+  </div>
+  }
+</div>
+@if (edit&&editMessage){
+<div
+  style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+  "
+>
+  <div class="alert bg-light" style="width: 60%">
+    <app-contact-form
+      (onEditClose)="onEditClose($event)"
+      [message]="editMessage"
+    ></app-contact-form>
+  </div>
+</div>
+}
 <table class="table">
   <thead>
     <tr>
       <th scope="col">ID</th>
       <th scope="col">Name</th>
       <th scope="col">Email</th>
-      <th scope="col">Mobile</th>
+      <th scope="col">Phone</th>
       <th scope="col">Message</th>
       <th scope="col">Actions</th>
       <th scope="col"></th>
@@ -19,11 +71,21 @@
       <td>{{ obj._id }}</td>
       <td>{{ obj.name }}</td>
       <td>{{ obj.email }}</td>
-      <td>{{ obj.mobile }}</td>
+      <td>{{ obj.phone }}</td>
       <td>{{ obj.message }}</td>
-      <td><button type="button" class="btn btn-info btn-sm">Edit</button></td>
       <td>
-        <button type="button" class="btn btn-danger btn-sm">Delete</button>
+        <button type="button" class="btn btn-info btn-sm" (click)="onEdit(obj)">
+          Edit
+        </button>
+      </td>
+      <td>
+        <button
+          type="button"
+          class="btn btn-danger btn-sm"
+          (click)="deleteMessage(obj._id)"
+        >
+          Delete
+        </button>
       </td>
     </tr>
   </tbody>
